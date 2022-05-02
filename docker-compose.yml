@@ -1,17 +1,20 @@
-version: '3.1'
+version: '3.9'
 
 services:
   auth:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
     ports:
-      - "3091: 3091"
+      - 3091:3091
+    depends_on:
+      - auth-db
   
   auth-db:
     image: postgres:13.06
-    restart: always
     ports:
-      - "5432:5432"
+      - 5432:5432
     environment:
-      - POSTGRES_DATABASE: users
-      - POSTGRES_USER: authdb
-      - POSTGRES_PASSWORD: authdb-password
+      - POSTGRES_DB=users
+      - POSTGRES_USER=authdb
+      - POSTGRES_PASSWORD=authdb-password
