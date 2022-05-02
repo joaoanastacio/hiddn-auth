@@ -11,7 +11,7 @@ services:
       - auth-db
   
   auth-db:
-    image: postgres:13.06
+    image: postgres:13
     ports:
       - 5432:5432
     environment:
