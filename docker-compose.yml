@@ -1,0 +1,17 @@
+version: '3.1'
+
+services:
+  auth:
+    build: .
+    ports:
+      - "3091: 3091"
+  
+  auth-db:
+    image: postgres:13.06
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DATABASE: users
+      - POSTGRES_USER: authdb
+      - POSTGRES_PASSWORD: authdb-password
