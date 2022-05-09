@@ -18,3 +18,12 @@ services:
       - POSTGRES_DB=users
       - POSTGRES_USER=authdb
       - POSTGRES_PASSWORD=authdb-password
+
+  auth-loadbalancer:
+    build:
+      context: ./loadbalancer/
+      dockerfile: Dockerfile.dev
+    ports:
+      - 5100:5100
+    depends_on:
+      - auth
