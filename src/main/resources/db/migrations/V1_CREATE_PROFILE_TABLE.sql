@@ -21,12 +21,16 @@ ALTER TABLE TB_PROFILE ALTER COLUMN profile_verified SET DEFAULT false;
 
 CREATE TABLE TB_PROFILE_FOLLOWER(
     profile_follower_id SERIAL PRIMARY KEY,
-    FOREIGN KEY (profile_id) REFERENCES TB_PROFILE (profile_id),
-    FOREIGN KEY (follower_id) REFERENCES TB_PROFILE (follower_id)
+    profile_id SERIAL NOT NULL,
+    follower_id SERIAL NOT NULL,
+    CONSTRAINT fk_follower_profile_id FOREIGN KEY(profile_id) REFERENCES TB_PROFILE (profile_id),
+    CONSTRAINT fk_follower_follower_id FOREIGN KEY(follower_id) REFERENCES TB_PROFILE (profile_id)
 );
 
 CREATE TABLE TB_PROFILE_FOLLOWING(
     profile_following_id SERIAL PRIMARY KEY,
-    FOREIGN KEY (profile_id) REFERENCES TB_PROFILE (profile_id),
-    FOREIGN KEY (following_id) REFERENCES TB_PROFILE (following_id)
+    profile_id SERIAL NOT NULL,
+    following_id SERIAL NOT NULL,
+    CONSTRAINT fk_following_profile_id FOREIGN KEY(profile_id) REFERENCES TB_PROFILE (profile_id),
+    CONSTRAINT fk_following_follower_id FOREIGN KEY(following_id) REFERENCES TB_PROFILE (profile_id)
 );
